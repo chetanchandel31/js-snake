@@ -1,0 +1,27 @@
+*{
+    text-align: center;
+}
+
+.grid{
+    width: 340px;
+    height: 340px;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid 2px black;
+    margin: auto;
+}
+
+.grid div {
+    height: 34px;
+    width: 34px;
+    border: solid 2px red;
+    box-sizing: border-box;
+}
+
+.snake{
+    background-color: blue;
+}
+
+.apple{
+    background-color: gold;
+}
