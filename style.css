@@ -1,5 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 *{
     text-align: center;
+    font-family: 'Patrick Hand', cursive;
+}
+
+body{
+    background-color: #242582;
+    color: white;
+}
+/* game grid related stuff */
+.game{
+    display: none;
 }
 
 .grid{
@@ -7,7 +19,8 @@
     height: 340px;
     display: flex;
     flex-wrap: wrap;
-    border: solid 2px black;
+    border: solid 4px #f64c72;
+    background-color: #5cdb95;
     margin: auto;
 }
 
@@ -19,10 +32,74 @@
 }
 
 .apple{
-    background-color: gold;
+    background-color: red;
 }
 
 .snake{
-    background-color: brown;
-    border: solid 2px red;
+    background-color: #05386b;
+    border: solid 1px rgb(108, 126, 90);
+    border-radius: 10px;
+}
+
+/* non game grid related stuff */
+
+.instructions{
+    font-size: x-large;
+}
+
+.start{
+    color: #242582;
+    background-color: #f64c72;
+    border: solid 2px #f64c72;
+    box-sizing: border-box;
+    font-weight: 900;
+    font-size: larger;
+    outline: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: 0.4s;
+}
+
+.start:hover, start:active{
+    color: #f64c72;
+    background-color: #242582;
+    border: solid 2px #f64c72;
+}
+
+.start:active{
+    transform: translateY(10px);
+}
+
+/* arrow keys */
+.arrowBtn{
+    width: 50%;
+    max-width: 200px;
+    display: none;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.arrowBtn span{
+    width: 33.33%;
+}
+
+.arrowKey{
+    color: #f64c72;
+    font-weight: 900;
+    font-size: x-large;
+    box-sizing: border-box;
+    padding: 3px;
+    border: solid 3px #f64c72;
+    border-radius: 30%;
+    transition: 0.5s;
+}
+
+.arrowKey:active, .arrowKey:hover{
+    color: #242582;
+    background-color: #f64c72;
+}
+
+.arrowKey:active{
+    transform: translateY(10px);
 }

@@ -10,12 +10,36 @@
 </head>
 
 <body>
+
+    <div class='instructions'>
+        <p>
+            Play as snake against Mukesh(who will just keep re-spawning infinitely) and inevitably lose.
+        </p>
+
+        <p>
+            It's recommended to use arrow keys to change snake's direction but if you're on mobile you can use on-screen buttons instead.
+        </p>
+
+        <p>
+            Touching the boundary or a part of snake's tail will end the game. Snake's length and speed keeps growing as your score increases.
+        </p>
+    </div>
+
+    <div class='game'>
+        <h2>Score: <span class='score'>0</span></h2>
+
+        <div class='grid'>
+            <!-- inject 100 divs -->
+        </div>
+    
+    </div>
+
     <button class='start'>Start</button>
 
-    <h1>Score: <span class='score'>0</span></h1>
-
-    <div class='grid'>
-        <!-- inject 100 divs -->
+    <div class='arrowBtn'>
+        <span></span><span class='arrowKey'>↑</span><span></span>
+        <span class='arrowKey'>←</span><span></span><span class='arrowKey'>→</span>
+        <span></span><span class='arrowKey'>↓</span><span></span>
     </div>
 
     <script src='./app.js'></script>

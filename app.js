@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(interval);
         interval = setInterval(moveSnake, intervalTime);
         
-        document.querySelector('.start').textContent = 'Re-start'
+        document.querySelector('.start').textContent = 'Restart';
+        document.querySelector('.game').style.display = 'block';
+        document.querySelector('.instructions').style.display = 'none';
+        document.querySelector('.arrowBtn').style.display = 'flex';
     }
 
     function moveSnake() {
