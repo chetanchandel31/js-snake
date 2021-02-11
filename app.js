@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const boxes = document.querySelectorAll('.grid div');
     let currentSnake = [2, 1, 0];//each element represents an index of boxes
     let score = 0;
-    // let appleIndex = spawnApple();
     let speed = 0.9;
     let interval;
     let intervalTime = 1000;
@@ -93,6 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validMoveMade) allowDirectionChange = false;
     }
 
+    function replicateKeyBehaviour (code) {
+        let e = {};
+        e.keyCode = code;
+        changeDirection(e);
+    }
+
     function spawnApple() {
         let appleIndex;
 
@@ -111,5 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keyup', changeDirection)
     document.querySelector('.start').addEventListener('click', startGame);
-
+    //arrow buttons
+    document.querySelector('#left').addEventListener('click', () => replicateKeyBehaviour(37));
+    document.querySelector('#up').addEventListener('click', () => replicateKeyBehaviour(38));
+    document.querySelector('#right').addEventListener('click', () => replicateKeyBehaviour(39));
+    document.querySelector('#down').addEventListener('click', () => replicateKeyBehaviour(40));
 })

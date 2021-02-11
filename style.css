@@ -27,12 +27,16 @@ body{
 .grid div {
     height: 34px;
     width: 34px;
-    /* border: solid 2px red; */
+    /* border: solid 0.5px red; */
     box-sizing: border-box;
 }
 
 .apple{
-    background-color: red;
+    /* background-color: red; */
+    background: url(./images/Group-2.svg);
+    background-repeat: no-repeat;
+    background-size: 100px 38px;
+    background-position: center;
 }
 
 .snake{
