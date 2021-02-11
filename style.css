@@ -14,7 +14,7 @@
 .grid div {
     height: 34px;
     width: 34px;
-    border: solid 2px red;
+    /* border: solid 2px red; */
     box-sizing: border-box;
 }
 
@@ -23,5 +23,6 @@
 }
 
 .snake{
-    background-color: blue;
+    background-color: brown;
+    border: solid 2px red;
 }

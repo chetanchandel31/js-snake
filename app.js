@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         gridEl.appendChild(gridChild);
     }
 
+    const scoreEl = document.querySelector('.score');
     const boxes = document.querySelectorAll('.grid div');
-    let currentSnake = [2, 1, 0];
-    // let currentIndex = 0;
+    let currentSnake = [2, 1, 0];//each element represents an index of boxes
+    let score = 0;
     // let appleIndex = spawnApple();
     let speed = 0.9;
     let interval;
@@ -22,12 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
         boxes.forEach(box => box.classList.remove('snake', 'apple'))
         currentSnake = [2, 1, 0];
         currentSnake.forEach(i => boxes[i].classList.add('snake'));
-        intervalTime = 1000;
         direction = 1;
         spawnApple();
+        updateScore(0);
+        intervalTime = 1000;
         clearInterval(interval);
-        interval = setInterval(moveSnake, intervalTime)
-
+        interval = setInterval(moveSnake, intervalTime);
+        
+        document.querySelector('.start').textContent = 'Re-start'
     }
 
     function moveSnake() {
@@ -36,17 +39,33 @@ document.addEventListener('DOMContentLoaded', () => {
             (currentSnake[0] - width < 0 && direction === -width) || //top wall
             (currentSnake[0] + width > width * width && direction === width) || //bottom wall
             (currentSnake[0] % width === width - 1 && direction === 1) || //right wall
-            (currentSnake[0] % width === 0 && direction === -1) ||//left wall
-            (boxes[currentSnake[0]+direction].classList.contains('snake')) //itself
+            (currentSnake[0] % width === 0 && direction === -1) || //left wall
+            (boxes[currentSnake[0] + direction].classList.contains('snake') &&
+            currentSnake[0] + direction !== currentSnake[currentSnake.length - 1]) //itself
         ) {
             clearInterval(interval);
             return alert('game over')
         }
         //change array and then render NEW snake to avoid bugs
-        currentSnake.pop();
+        let tail = currentSnake.pop();
         currentSnake.unshift(currentSnake[0] + direction);
         boxes.forEach(box => box.className = box.className.replace('snake', ''));
         currentSnake.forEach(i => boxes[i].classList.add('snake'));
+
+        //if apple eaten
+        if (boxes[currentSnake[0]].classList.contains('apple')) {
+            //remove apple and restore tail
+            boxes[currentSnake[0]].classList.remove('apple');
+            currentSnake.push(tail);
+            boxes[tail].classList.add('snake');
+            //spawn new apple and update score
+            spawnApple();
+            updateScore(score+1);
+            //update interval
+            intervalTime *= speed;
+            clearInterval(interval);
+            interval = setInterval(moveSnake, intervalTime);
+        }
 
         allowDirectionChange = true;
     }
@@ -80,6 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } while (boxes[appleIndex].classList.contains('snake'))
 
         boxes[appleIndex].classList.add('apple');
+    }
+
+    function updateScore(newScore){
+        score = newScore;
+        scoreEl.textContent = score;
     }
 
     document.addEventListener('keyup', changeDirection)
