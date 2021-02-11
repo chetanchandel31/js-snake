@@ -12,9 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // let currentIndex = 0;
     // let appleIndex = spawnApple();
     let speed = 0.9;
-    let interval = 0;
+    let interval;
     let intervalTime = 1000;
     let direction = 1;
+    let allowDirectionChange = false;
 
     function startGame() {
         // reset everything and move snake
@@ -30,19 +31,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveSnake() {
-        //handle apple and loss
-
-        let tail = currentSnake.pop();
+        //handle snake touches wall or itself
+        if (
+            (currentSnake[0] - width < 0 && direction === -width) || //top wall
+            (currentSnake[0] + width > width * width && direction === width) || //bottom wall
+            (currentSnake[0] % width === width - 1 && direction === 1) || //right wall
+            (currentSnake[0] % width === 0 && direction === -1) ||//left wall
+            (boxes[currentSnake[0]+direction].classList.contains('snake')) //itself
+        ) {
+            clearInterval(interval);
+            return alert('game over')
+        }
+        //change array and then render NEW snake to avoid bugs
+        currentSnake.pop();
         currentSnake.unshift(currentSnake[0] + direction);
-        boxes[tail].classList.remove('snake');
-        boxes[currentSnake[0]].classList.add('snake');
+        boxes.forEach(box => box.className = box.className.replace('snake', ''));
+        currentSnake.forEach(i => boxes[i].classList.add('snake'));
+
+        allowDirectionChange = true;
     }
 
-    function changeDirection (e) {
-        if (e.keyCode === 37 && direction !== 1) direction = -1; //left
-        if (e.keyCode === 38 && direction !== width) direction = -width;//up
-        if (e.keyCode === 39 && direction !== -1) direction = 1; //right
-        if (e.keyCode === 40 && direction !== -width) direction = width; //down
+    function changeDirection(e) {
+        if (!allowDirectionChange) return;
+
+        let validMoveMade = true;
+
+        if (e.keyCode === 37 && direction !== 1) {
+            direction = -1; //left
+        } else if (e.keyCode === 38 && direction !== width) {
+            direction = -width; //up
+        } else if (e.keyCode === 39 && direction !== -1) {
+            direction = 1; //right
+        } else if (e.keyCode === 40 && direction !== -width) {
+            direction = width; //down
+        } else {
+            validMoveFound = false;
+        }
+        //don't allow direction change ONLY IF A VALID MOVE HAS BEEN MADE, moveSnake() will allow direction change after moving snake
+        if (validMoveMade) allowDirectionChange = false;
     }
 
     function spawnApple() {
