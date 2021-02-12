@@ -16,6 +16,7 @@ body{
 
 .grid{
     width: 340px;
+    max-width: 98%;
     height: 340px;
     display: flex;
     flex-wrap: wrap;
@@ -26,6 +27,7 @@ body{
 
 .grid div {
     height: 34px;
+    max-width: 10%;
     width: 34px;
     /* border: solid 0.5px red; */
     box-sizing: border-box;
@@ -33,9 +35,9 @@ body{
 
 .apple{
     /* background-color: red; */
-    background: url(./images/Group-2.svg);
+    background: url(./images/Apple.png);
     background-repeat: no-repeat;
-    background-size: 100px 38px;
+    background-size: cover;
     background-position: center;
 }
 
@@ -49,6 +51,12 @@ body{
 
 .instructions{
     font-size: x-large;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    justify-content:center;
 }
 
 .start{
